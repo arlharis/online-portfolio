@@ -99,11 +99,25 @@ const config = {
   // To hide the `My Projects` section, keep it empty.
   externalProjects: [
     {
+      title: 'Travel Recommends (e-Commerce)',
+      description:
+        'Contribute in develop new features and maintain the system',
+      imageUrl: 'https://travelrecommends.com//assets/images/favicon.ico',
+      link: 'https://travelrecommends.com',
+    },
+    {
       title: 'Reporting & Maintainance System for NOVATIS',
       description:
         'Contribute in develop the in-house system called (NovaRMS) for reporting and maintaining works for KKFIR project',
       imageUrl: 'https://laravel.com/img/logomark.min.svg',
       link: 'http://kkfir.novatis.com.my:9090',
+    },
+    {
+      title: 'AliveInvite (e-Commerce)',
+      description:
+        'Contribute in develop new features and maintain the system',
+      imageUrl: 'https://www.aliveinvite.com/assets/logos/logo-aliveinvite-5124351ffde8c3ea98b7a1a9d472a4bb54d8174ca1e3abce70eada0541acc70b.png',
+      link: 'https://www.aliveinvite.com/',
     },
   ],
   // Display blog posts from your medium or dev account. (Optional)
