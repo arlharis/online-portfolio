@@ -106,7 +106,7 @@ const config = {
       link: 'https://travelrecommends.com',
     },
     {
-      title: 'Reporting & Maintainance System for NOVATIS',
+      title: 'Reporting & Maintainance System (NovaRMS) for NOVATIS',
       description:
         'Contribute in develop the in-house system called (NovaRMS) for reporting and maintaining works for KKFIR project',
       imageUrl: 'https://laravel.com/img/logomark.min.svg',
