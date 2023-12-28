@@ -11,57 +11,72 @@ const config = {
     },
   },
   social: {
-    linkedin: 'ariful-alam',
-    twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
-    facebook: '',
-    instagram: '',
+    linkedin: 'arlharis',
+    twitter: 'arlharis',
+    mastodon: '',
+    facebook: 'Lukman Imran',
+    instagram: 'lukman.hzq',
     youtube: '', // example: 'pewdiepie'
     dribbble: '',
     behance: '',
-    medium: 'arifszn',
-    dev: 'arifszn',
+    medium: '',
+    dev: '',
     stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
-    website: 'https://arifszn.com',
+    website: '',
     phone: '',
-    email: 'arifulalamszn@gmail.com',
+    email: 'arlharis.sa@gmail.com',
   },
   resume: {
     fileUrl:
-      'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+      '', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     'PHP',
     'Laravel',
+    'CodeIgniter',
     'JavaScript',
-    'React.js',
-    'Node.js',
-    'Nest.js',
+    'jQuery',
     'MySQL',
     'PostgreSQL',
     'Git',
     'Docker',
-    'PHPUnit',
+    'API Integration',
+    'Payment Intregration (2C2P, Billplz, Stripe)',
     'CSS',
-    'Antd',
-    'Tailwind',
+    'SCSS',
+    'Bootstrap',
+    'AWS',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
+      company: 'Changi Travel Services Pte Ltd',
+      position: 'Web Developer',
+      from: 'February 2023',
       to: 'Present',
-      companyLink: 'https://example.com',
+      companyLink: 'https://sg.linkedin.com/company/changitravelservices',
     },
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'Novatis Resources Sdn Bhd',
+      position: 'Freelance Web Developer',
+      from: 'February 2023',
+      to: 'June 2023',
+      companyLink: 'https://www.novatis.com.my/novatis/',
+    },
+    {
+      company: 'Novatis Resources Sdn Bhd',
+      position: 'System Engineer',
+      from: 'November 2021',
+      to: 'January 2023',
+      companyLink: 'https://www.novatis.com.my/novatis/',
+    },
+    {
+      company: 'Pandan Digital (Rebrand as Elevate Academy of Technology & Innovation)',
+      position: 'Software Engineer',
+      from: 'August 2019',
+      to: 'October 2021',
+      companyLink: 'https://elevateacademy.my/',
     },
   ],
   /* certifications: [
@@ -74,40 +89,27 @@ const config = {
   ], */
   education: [
     {
-      institution: 'Institution Name',
+      institution: 'Universiti Malaysia Sarawak',
       degree: 'Degree',
       from: '2015',
       to: '2019',
-    },
-    {
-      institution: 'Institution Name',
-      degree: 'Degree',
-      from: '2012',
-      to: '2014',
     },
   ],
 
   // To hide the `My Projects` section, keep it empty.
   externalProjects: [
     {
-      title: 'Project Name',
+      title: 'Reporting & Maintainance System for NOVATIS',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-      imageUrl: 'https://via.placeholder.com/250x250',
-      link: 'https://example.com',
-    },
-    {
-      title: 'Project Name',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-      imageUrl: 'https://via.placeholder.com/250x250',
-      link: 'https://example.com',
+        'Contribute in develop the in-house system called (NovaRMS) for reporting and maintaining works for KKFIR project',
+      imageUrl: 'https://laravel.com/img/logomark.min.svg',
+      link: 'http://kkfir.novatis.com.my:9090',
     },
   ],
   // Display blog posts from your medium or dev account. (Optional)
   blog: {
     source: 'dev', // medium | dev
-    username: 'arifszn', // to hide blog section, keep it empty
+    username: '', // to hide blog section, keep it empty
     limit: 2, // How many posts to display. Max is 10.
   },
   googleAnalytics: {
