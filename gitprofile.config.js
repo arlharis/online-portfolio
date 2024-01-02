@@ -135,7 +135,7 @@ const config = {
     snippetVersion: 6,
   },
   themeConfig: {
-    defaultTheme: 'wireframe',
+    defaultTheme: 'night',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode
@@ -156,14 +156,14 @@ const config = {
       'bumblebee',
       'emerald',
       'corporate',
-      'synthwave',
-      'retro',
-      'cyberpunk',
-      'valentine',
+      // 'synthwave',
+      // 'retro',
+      // 'cyberpunk',
+      // 'valentine',
       'halloween',
       'garden',
       'forest',
-      'aqua',
+      // 'aqua',
       'lofi',
       'pastel',
       'fantasy',
@@ -171,15 +171,15 @@ const config = {
       'black',
       'luxury',
       'dracula',
-      'cmyk',
+      // 'cmyk',
       'autumn',
       'business',
-      'acid',
+      // 'acid',
       'lemonade',
       'night',
       'coffee',
       'winter',
-      'procyon',
+      // 'procyon',
     ],
 
     // Custom theme
