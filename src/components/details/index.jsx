@@ -211,7 +211,7 @@ const Details = ({ profile, loading, social, github }) => {
                   icon={<FaGlobe />}
                   title="Website:"
                   value={social.website}
-                  link={social.website}
+                  link={`https://${social.website}`}
                 />
               )}
               {social?.skype && (
