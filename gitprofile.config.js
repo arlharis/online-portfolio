@@ -14,7 +14,7 @@ const config = {
     linkedin: 'arlharis',
     twitter: '',
     mastodon: '',
-    facebook: 'Lukman Imran',
+    // facebook: 'Lukman Imran',
     instagram: 'lukman.hzq',
     youtube: '', // example: 'pewdiepie'
     dribbble: '',
@@ -24,7 +24,7 @@ const config = {
     stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
-    website: '',
+    website: 'arlharis.com',
     phone: '',
     email: 'arlharis.sa@gmail.com',
   },
