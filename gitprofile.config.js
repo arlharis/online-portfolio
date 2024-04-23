@@ -52,9 +52,16 @@ const config = {
   experiences: [
     {
       company: 'Changi Travel Services Pte Ltd',
+      position: 'Software Engineer',
+      from: 'January 2024',
+      to: 'Present',
+      companyLink: 'https://sg.linkedin.com/company/changitravelservices',
+    },
+    {
+      company: 'Changi Travel Services Pte Ltd',
       position: 'Web Developer',
       from: 'February 2023',
-      to: 'Present',
+      to: 'December 2023',
       companyLink: 'https://sg.linkedin.com/company/changitravelservices',
     },
     {
