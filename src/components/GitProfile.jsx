@@ -54,61 +54,95 @@ const GitProfile = ({ config }) => {
   }, [theme]);
 
   const loadData = useCallback(() => {
+    const fallbackProfile = {
+      avatar: sanitizedConfig.profile?.avatar || '',
+      name: sanitizedConfig.profile?.name || 'Lukman Imran',
+      bio:
+        sanitizedConfig.profile?.bio ||
+        'Software Engineer specializing in Laravel, Vue.js, enterprise admin systems, pricing workflows, API integrations, and travel-commerce systems.',
+      location: sanitizedConfig.profile?.location || '',
+      company: sanitizedConfig.profile?.company || '',
+    };
+
+    const shouldFetchGithubRepos = sanitizedConfig.github?.limit > 0;
+    const hasGithubUsername = Boolean(sanitizedConfig.github?.username);
+
+    if (!shouldFetchGithubRepos) {
+      setProfile(fallbackProfile);
+      setRepo([]);
+      setLoading(false);
+      return;
+    }
+
+    if (!hasGithubUsername) {
+      setProfile(fallbackProfile);
+      setRepo([]);
+      setLoading(false);
+      return;
+    }
+
     axios
       .get(`https://api.github.com/users/${sanitizedConfig.github.username}`)
       .then((response) => {
-        let data = response.data;
+        const data = response.data;
 
-        let profileData = {
-          avatar: data.avatar_url,
-          name: data.name ? data.name : '',
-          bio: data.bio ? data.bio : '',
-          location: data.location ? data.location : '',
-          company: data.company ? data.company : '',
+        const profileData = {
+          avatar: data.avatar_url || fallbackProfile.avatar,
+          name: data.name || fallbackProfile.name,
+          bio: fallbackProfile.bio || data.bio || '',
+          location: data.location || fallbackProfile.location,
+          company: data.company || fallbackProfile.company,
         };
 
         setProfile(profileData);
-        return data;
-      })
-      .then((userData) => {
-        let excludeRepo = ``;
-        if (userData.public_repos === 0) {
+
+        if (!shouldFetchGithubRepos || data.public_repos === 0) {
           setRepo([]);
-          return;
+          return null;
         }
+
+        let excludeRepo = '';
 
         sanitizedConfig.github.exclude.projects.forEach((project) => {
           excludeRepo += `+-repo:${sanitizedConfig.github.username}/${project}`;
         });
 
-        let query = `user:${
-          sanitizedConfig.github.username
-        }+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
+        const query = `user:${sanitizedConfig.github.username}+fork:${!sanitizedConfig.github.exclude.forks}${excludeRepo}`;
 
-        let url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.github.sortBy}&per_page=${sanitizedConfig.github.limit}&type=Repositories`;
+        const url = `https://api.github.com/search/repositories?q=${query}&sort=${sanitizedConfig.github.sortBy}&per_page=${sanitizedConfig.github.limit}&type=Repositories`;
 
-        axios
-          .get(url, {
-            headers: {
-              'Content-Type': 'application/vnd.github.v3+json',
-            },
-          })
-          .then((response) => {
-            let data = response.data;
-
-            setRepo(data.items);
-          })
-          .catch((error) => {
-            handleError(error);
-          });
+        return axios.get(url, {
+          headers: {
+            'Content-Type': 'application/vnd.github.v3+json',
+          },
+        });
+      })
+      .then((response) => {
+        if (response?.data?.items) {
+          setRepo(response.data.items);
+        }
       })
       .catch((error) => {
-        handleError(error);
+        console.error('GitHub API failed:', error);
+
+        // Do not block the entire portfolio if GitHub rate limits the request.
+        setProfile(fallbackProfile);
+        setRepo([]);
+
+        const status = error?.response?.status;
+
+        if (status === 404) {
+          setError(notFoundError);
+        }
+
+        // Important:
+        // Do not show 403/429 as full error page.
+        // Portfolio should still be usable.
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [setLoading]);
+  }, [sanitizedConfig]);
 
   const handleError = (error) => {
     console.error('Error:', error);
@@ -181,10 +215,6 @@ const GitProfile = ({ config }) => {
                         loading={loading}
                         skills={sanitizedConfig.skills}
                       />
-                      <Experience
-                        loading={loading}
-                        experiences={sanitizedConfig.experiences}
-                      />
                       <Education
                         loading={loading}
                         education={sanitizedConfig.education}
@@ -196,25 +226,32 @@ const GitProfile = ({ config }) => {
                     </div>
                   </div>
                   <div className="lg:col-span-2 col-span-1">
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid gr`id-cols-1 gap-6">
+                      <Experience
+                        loading={loading}
+                        experiences={sanitizedConfig.experiences}
+                      />
+
+                      <ExternalProject
+                        loading={loading}
+                        externalProjects={sanitizedConfig.externalProjects}
+                        googleAnalytics={sanitizedConfig.googleAnalytics}
+                      />
+
                       <Project
                         repo={repo}
                         loading={loading}
                         github={sanitizedConfig.github}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
                       />
-                      <ExternalProject
-                        loading={loading}
-                        externalProjects={sanitizedConfig.externalProjects}
-                        googleAnalytics={sanitizedConfig.googleAnalytics}
-                      />
+
                       <Blog
                         loading={loading}
                         googleAnalytics={sanitizedConfig.googleAnalytics}
                         blog={sanitizedConfig.blog}
                       />
                     </div>
-                  </div>
+                  </div>`
                 </div>
               </div>
               <footer
@@ -234,6 +271,14 @@ const GitProfile = ({ config }) => {
 
 GitProfile.propTypes = {
   config: PropTypes.shape({
+    profile: PropTypes.shape({
+      name: PropTypes.string,
+      title: PropTypes.string,
+      avatar: PropTypes.string,
+      bio: PropTypes.string,
+      location: PropTypes.string,
+      company: PropTypes.string,
+    }),
     github: PropTypes.shape({
       username: PropTypes.string.isRequired,
       sortBy: PropTypes.oneOf(['stars', 'updated']),
@@ -279,6 +324,9 @@ GitProfile.propTypes = {
         position: PropTypes.string,
         from: PropTypes.string,
         to: PropTypes.string,
+        companyLink: PropTypes.string,
+        description: PropTypes.array,
+        technologies: PropTypes.array,
       })
     ),
     certifications: PropTypes.arrayOf(

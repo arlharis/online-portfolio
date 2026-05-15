@@ -5,64 +5,67 @@ import { MdInsertLink } from 'react-icons/md';
 import { ga, languageColor, skeleton } from '../../helpers/utils';
 
 const Project = ({ repo, loading, github, googleAnalytics }) => {
+  const shouldShowGithubProjects = github?.limit > 0;
+
+  if (!shouldShowGithubProjects) {
+    return null;
+  }
+
   if (!loading && Array.isArray(repo) && repo.length === 0) {
-    return <></>;
+    return null;
   }
 
   const renderSkeleton = () => {
-    let array = [];
-    for (let index = 0; index < github.limit; index++) {
-      array.push(
-        <div className="card shadow-lg compact bg-base-100" key={index}>
-          <div className="flex justify-between flex-col p-8 h-full w-full">
-            <div>
-              <div className="flex items-center">
-                <span>
-                  <h5 className="card-title text-lg">
-                    {skeleton({
-                      width: 'w-32',
-                      height: 'h-8',
-                      className: 'mb-1',
-                    })}
-                  </h5>
-                </span>
-              </div>
-              <div className="mb-5 mt-1">
-                {skeleton({
-                  width: 'w-full',
-                  height: 'h-4',
-                  className: 'mb-2',
-                })}
-                {skeleton({ width: 'w-full', height: 'h-4' })}
-              </div>
+    return Array.from({ length: github.limit }).map((_, index) => (
+      <div className="card shadow-lg compact bg-base-100" key={index}>
+        <div className="flex justify-between flex-col p-8 h-full w-full">
+          <div>
+            <div className="flex items-center">
+              <span>
+                <h5 className="card-title text-lg">
+                  {skeleton({
+                    width: 'w-32',
+                    height: 'h-8',
+                    className: 'mb-1',
+                  })}
+                </h5>
+              </span>
             </div>
-            <div className="flex justify-between">
-              <div className="flex flex-grow">
-                <span className="mr-3 flex items-center">
-                  {skeleton({ width: 'w-12', height: 'h-4' })}
-                </span>
-                <span className="flex items-center">
-                  {skeleton({ width: 'w-12', height: 'h-4' })}
-                </span>
-              </div>
-              <div>
-                <span className="flex items-center">
-                  {skeleton({ width: 'w-12', height: 'h-4' })}
-                </span>
-              </div>
+
+            <div className="mb-5 mt-1">
+              {skeleton({
+                width: 'w-full',
+                height: 'h-4',
+                className: 'mb-2',
+              })}
+              {skeleton({ width: 'w-full', height: 'h-4' })}
+            </div>
+          </div>
+
+          <div className="flex justify-between">
+            <div className="flex flex-grow">
+              <span className="mr-3 flex items-center">
+                {skeleton({ width: 'w-12', height: 'h-4' })}
+              </span>
+              <span className="flex items-center">
+                {skeleton({ width: 'w-12', height: 'h-4' })}
+              </span>
+            </div>
+            <div>
+              <span className="flex items-center">
+                {skeleton({ width: 'w-12', height: 'h-4' })}
+              </span>
             </div>
           </div>
         </div>
-      );
-    }
-
-    return array;
+      </div>
+    ));
   };
 
   const renderProjects = () => {
     return repo.map((item, index) => (
       <a
-        className="card shadow-lg compact bg-base-100 cursor-pointer"
+        className="card shadow-lg compact bg-base-100 cursor-pointer hover:shadow-xl transition-shadow"
         href={item.html_url}
         key={index}
         onClick={(e) => {
@@ -81,41 +84,47 @@ const Project = ({ repo, loading, github, googleAnalytics }) => {
             console.error(error);
           }
 
-          window?.open(item.html_url, '_blank');
+          window?.open(item.html_url, '_blank', 'noopener,noreferrer');
         }}
       >
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <div>
             <div className="flex items-center">
-              <div className="card-title text-lg tracking-wide flex text-base-content opacity-60">
-                <MdInsertLink className="my-auto" />
+              <div className="card-title text-lg tracking-wide flex items-center gap-2 text-base-content opacity-70">
+                <MdInsertLink />
                 <span>{item.name}</span>
               </div>
             </div>
-            <p className="mb-5 mt-1 text-base-content text-opacity-60 text-sm">
-              {item.description}
+
+            <p className="mb-5 mt-2 text-base-content text-opacity-70 text-sm leading-relaxed">
+              {item.description || 'No description provided.'}
             </p>
           </div>
+
           <div className="flex justify-between text-sm text-base-content text-opacity-60 truncate">
             <div className="flex flex-grow">
               <span className="mr-3 flex items-center">
                 <AiOutlineStar className="mr-0.5" />
                 <span>{item.stargazers_count}</span>
               </span>
+
               <span className="flex items-center">
                 <AiOutlineFork className="mr-0.5" />
                 <span>{item.forks_count}</span>
               </span>
             </div>
-            <div>
-              <span className="flex items-center">
-                <div
-                  className="w-3 h-3 rounded-full mr-1 opacity-60"
-                  style={{ backgroundColor: languageColor(item.language) }}
-                />
-                <span>{item.language}</span>
-              </span>
-            </div>
+
+            {item.language && (
+              <div>
+                <span className="flex items-center">
+                  <div
+                    className="w-3 h-3 rounded-full mr-1 opacity-60"
+                    style={{ backgroundColor: languageColor(item.language) }}
+                  />
+                  <span>{item.language}</span>
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </a>
@@ -139,6 +148,7 @@ const Project = ({ repo, loading, github, googleAnalytics }) => {
                       </span>
                     )}
                   </h5>
+
                   {loading ? (
                     skeleton({ width: 'w-10', height: 'h-5' })
                   ) : (
@@ -152,6 +162,7 @@ const Project = ({ repo, loading, github, googleAnalytics }) => {
                     </a>
                   )}
                 </div>
+
                 <div className="col-span-2">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {loading || !repo ? renderSkeleton() : renderProjects()}

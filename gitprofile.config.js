@@ -1,13 +1,21 @@
 // gitprofile.config.js
 
 const config = {
+  profile: {
+    name: 'Lukman Imran',
+    title: 'Software Engineer',
+    avatar: '/avatar-logo-1.png',
+    bio: 'I build and maintain enterprise travel-commerce platforms, internal product management systems, API integrations, pricing workflows, and production e-commerce systems across Laravel, Vue.js, CodeIgniter, MySQL, AWS, and mobile app maintenance.',
+    location: 'Singapore / Malaysia',
+    company: 'Changi Travel Services Pte Ltd',
+  },
   github: {
-    username: 'arlharis', // Your GitHub org/user name. (Required)
-    sortBy: 'stars', // stars | updated
-    limit: 6, // How many projects to display.
+    username: 'arlharis',
+    sortBy: 'updated',
+    limit: 0,
     exclude: {
-      forks: false, // Forked projects will not be displayed if set to true.
-      projects: [], // These projects will not be displayed. example: ['my-project1', 'my-project2']
+      forks: true,
+      projects: [],
     },
   },
   social: {
@@ -24,9 +32,9 @@ const config = {
     stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
-    website: 'arlharis.com',
+    website: 'arlharis-portfolio.netlify.app',
     phone: '',
-    email: 'arlharis.sa@gmail.com',
+    email: 'lukman.slwork@gmail.com',
   },
   resume: {
     fileUrl:
@@ -35,19 +43,28 @@ const config = {
   skills: [
     'PHP',
     'Laravel',
+    'Laravel Nova',
     'CodeIgniter',
+    'Vue.js',
     'JavaScript',
     'jQuery',
+    'Bootstrap',
+    'Tailwind CSS',
     'MySQL',
     'PostgreSQL',
-    'Git',
-    'Docker',
+    'REST API Development',
     'API Integration',
-    'Payment Intregration (2C2P, Billplz, Stripe)',
-    'CSS',
-    'SCSS',
-    'Bootstrap',
+    'Payment Integration',
+    'E-Commerce Systems',
+    'Product Management Systems',
+    'Pricing & Validation Workflows',
     'AWS',
+    'AWS Lightsail',
+    'Docker',
+    'Linux Server Management',
+    'Git',
+    'Android App Maintenance',
+    'Mobile App Upgrade',
   ],
   experiences: [
     {
@@ -56,6 +73,24 @@ const config = {
       from: 'January 2024',
       to: 'Present',
       companyLink: 'https://sg.linkedin.com/company/changitravelservices',
+      technologies: [
+        'Laravel',
+        'Laravel Nova',
+        'Vue.js',
+        'CodeIgniter',
+        'Bootstrap',
+        'MySQL',
+        'REST APIs',
+        'AWS',
+        'AWS Lightsail',
+        'Android',
+      ],
+      description: [
+        'Develop and maintain production travel e-commerce platforms including Travel Recommends Malaysia and Changi Recommends, supporting product listings, booking flows, pricing data, operational workflows, and production issue resolution.',
+        'Maintain and enhance Travel Recommends Malaysia, a CodeIgniter and Bootstrap-based e-commerce platform hosted on AWS Lightsail, including API integrations, frontend updates, backend fixes, and platform stability improvements.',
+        'Build and enhance internal admin tools for managing products, variants, units, pricing calendars, blackout rules, labels, product sub-types, media, activation workflows, and API-driven business operations.',
+        'Supported mobile application maintenance by upgrading the Changi Mobile Android app target SDK to Android 15 / API Level 35 and preparing the app for release compliance.',
+      ],
     },
     {
       company: 'Changi Travel Services Pte Ltd',
@@ -63,6 +98,11 @@ const config = {
       from: 'February 2023',
       to: 'December 2023',
       companyLink: 'https://sg.linkedin.com/company/changitravelservices',
+      technologies: ['PHP', 'Laravel', 'JavaScript', 'MySQL', 'API Integration'],
+      description: [
+        'Developed and maintained web-based systems supporting travel-commerce operations and internal business workflows.',
+        'Worked on backend enhancements, frontend updates, API-related improvements, bug fixes, and production support tasks.',
+      ],
     },
     {
       company: 'Novatis Resources Sdn Bhd',
@@ -70,6 +110,11 @@ const config = {
       from: 'February 2023',
       to: 'June 2023',
       companyLink: 'https://www.novatis.com.my/novatis/',
+      technologies: ['Laravel', 'PHP', 'MySQL', 'Bootstrap'],
+      description: [
+        'Supported web development and maintenance work for client-facing and internal systems.',
+        'Delivered backend and frontend improvements, bug fixes, and system updates based on business requirements.',
+      ],
     },
     {
       company: 'Novatis Resources Sdn Bhd',
@@ -77,13 +122,25 @@ const config = {
       from: 'November 2021',
       to: 'January 2023',
       companyLink: 'https://www.novatis.com.my/novatis/',
+      technologies: ['PHP', 'Laravel', 'MySQL', 'Linux', 'System Support'],
+      description: [
+        'Developed and maintained internal reporting and maintenance systems for operational tracking and project workflows.',
+        'Handled system support, troubleshooting, database updates, and application maintenance.',
+        'Worked with stakeholders to improve reporting flows and support day-to-day operational requirements.',
+      ],
     },
     {
-      company: 'Pandan Digital (Rebrand as Elevate Academy of Technology & Innovation)',
+      company: 'Pandan Digital / Elevate Academy of Technology & Innovation',
       position: 'Software Engineer',
       from: 'August 2019',
       to: 'October 2021',
       companyLink: 'https://elevateacademy.my/',
+      technologies: ['PHP', 'CodeIgniter', 'Laravel', 'MySQL', 'JavaScript'],
+      description: [
+        'Built and maintained web applications, backend modules, and database-driven systems.',
+        'Worked on frontend and backend development, issue resolution, and feature implementation.',
+        'Supported system improvements across education and training-related digital platforms.',
+      ],
     },
   ],
   /* certifications: [
@@ -106,24 +163,45 @@ const config = {
   // To hide the `My Projects` section, keep it empty.
   externalProjects: [
     {
-      title: 'Travel Recommends (e-Commerce)',
+      title: 'Enterprise Product Editor Platform',
       description:
-        'Contribute in develop new features and maintain the system',
-      imageUrl: 'https://travelrecommends.com//assets/images/favicon.ico',
+        'Internal travel-commerce product management platform supporting products, variants, units, pricing calendars, blackout rules, media, labels, product sub-types, activation validation, and complex admin workflows. Worked across Laravel, Laravel Nova, Vue.js, and MySQL to improve reliability, validation logic, and operational efficiency.',
+      imageUrl: '/cts-logo.png',
       link: 'https://travelrecommends.com',
     },
     {
-      title: 'Reporting & Maintainance System (NovaRMS) for NOVATIS',
+      title: 'Travel Recommends Malaysia E-Commerce Platform',
       description:
-        'Contribute in develop the in-house system called (NovaRMS) for reporting and maintaining works for KKFIR project',
-      imageUrl: 'https://laravel.com/img/logomark.min.svg',
+        'Production travel e-commerce platform for Malaysia market operations. Maintained and enhanced a CodeIgniter and Bootstrap-based platform hosted on AWS Lightsail, including API integrations, product and booking-related workflows, frontend updates, backend fixes, bug resolution, and production support.',
+      imageUrl: '/cts-logo.png',
+      link: 'https://travelrecommends.com/my',
+    },
+    {
+      title: 'Changi Recommends E-Commerce Platform',
+      description:
+        'Contributed to the maintenance and enhancement of a production travel e-commerce platform, including product data workflows, pricing-related handling, API integrations, operational issue fixes, and platform support on AWS infrastructure.',
+      imageUrl: '/cts-logo.png',
+      link: 'https://www.changirecommends.com/',
+    },
+    {
+      title: 'Changi Mobile Android App Upgrade',
+      description:
+        'Handled mobile app maintenance and release-readiness work by upgrading the Changi Mobile Android application target SDK to Android 15 / API Level 35, supporting platform compliance and continued app availability.',
+      imageUrl: '/cts-logo.png',
+      link: 'https://www.changirecommends.com/',
+    },
+    {
+      title: 'NovaRMS Reporting & Maintenance System',
+      description:
+        'Developed and maintained an internal reporting and maintenance system for operational tracking, issue reporting, and project workflow management. Worked on backend logic, database structures, user-facing modules, and system maintenance.',
+      imageUrl: '/novatis-resources-logo.png',
       link: 'http://kkfir.novatis.com.my:9090',
     },
     {
-      title: 'AliveInvite (e-Commerce)',
+      title: 'AliveInvite E-Commerce Platform',
       description:
-        'Contribute in develop new features and maintain the system',
-      imageUrl: 'https://www.aliveinvite.com/assets/logos/logo-aliveinvite-5124351ffde8c3ea98b7a1a9d472a4bb54d8174ca1e3abce70eada0541acc70b.png',
+        'Contributed to feature development and maintenance of an e-commerce platform, including backend enhancements, frontend updates, payment-related workflows, bug fixes, and platform stability improvements.',
+      imageUrl: '/aliveinvite-logo.png',
       link: 'https://www.aliveinvite.com/',
     },
   ],
@@ -142,7 +220,7 @@ const config = {
     snippetVersion: 6,
   },
   themeConfig: {
-    defaultTheme: 'night',
+    defaultTheme: 'business',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode
@@ -157,47 +235,47 @@ const config = {
 
     // Available themes. To remove any theme, exclude from here.
     themes: [
-      'light',
-      'dark',
-      'cupcake',
-      'bumblebee',
-      'emerald',
+      // 'light',
+      // 'dark',
+      // 'cupcake',
+      // 'bumblebee',
+      // 'emerald',
       'corporate',
       // 'synthwave',
       // 'retro',
       // 'cyberpunk',
       // 'valentine',
-      'halloween',
-      'garden',
-      'forest',
+      // 'halloween',
+      // 'garden',
+      // 'forest',
       // 'aqua',
-      'lofi',
-      'pastel',
-      'fantasy',
-      'wireframe',
-      'black',
-      'luxury',
-      'dracula',
+      // 'lofi',
+      // 'pastel',
+      // 'fantasy',
+      // 'wireframe',
+      // 'black',
+      // 'luxury',
+      // 'dracula',
       // 'cmyk',
-      'autumn',
+      // 'autumn',
       'business',
       // 'acid',
-      'lemonade',
+      // 'lemonade',
       'night',
-      'coffee',
-      'winter',
+      // 'coffee',
+      // 'winter',
       // 'procyon',
     ],
 
     // Custom theme
     customTheme: {
-      primary: '#fc055b',
-      secondary: '#219aaf',
-      accent: '#e8d03a',
-      neutral: '#2A2730',
-      'base-100': '#E3E3ED',
-      '--rounded-box': '3rem',
-      '--rounded-btn': '3rem',
+      primary: '#2563eb',
+      secondary: '#0f172a',
+      accent: '#38bdf8',
+      neutral: '#111827',
+      'base-100': '#ffffff',
+      '--rounded-box': '1rem',
+      '--rounded-btn': '0.75rem',
     },
   },
 
