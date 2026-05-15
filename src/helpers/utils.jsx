@@ -135,10 +135,22 @@ export const sanitizeConfig = (config) => {
   ];
 
   return {
+    profile: {
+      name: config?.profile?.name || '',
+      title: config?.profile?.title || '',
+      avatar: config?.profile?.avatar || '',
+      bio: config?.profile?.bio || '',
+      location: config?.profile?.location || '',
+      company: config?.profile?.company || '',
+    },
+
     github: {
       username: config?.github?.username || '',
       sortBy: config?.github?.sortBy || 'stars',
-      limit: config?.github?.limit || 8,
+
+      // Important: use ?? instead of || so limit: 0 is respected
+      limit: config?.github?.limit ?? 8,
+
       exclude: {
         forks: config?.github?.exclude?.forks || false,
         projects: config?.github?.exclude?.projects || [],
@@ -173,14 +185,14 @@ export const sanitizeConfig = (config) => {
     blog: {
       source: config?.blog?.source,
       username: config?.blog?.username,
-      limit: config?.blog?.limit || 5,
+      limit: config?.blog?.limit ?? 5,
     },
     googleAnalytics: {
       id: config?.googleAnalytics?.id,
     },
     hotjar: {
       id: config?.hotjar?.id,
-      snippetVersion: config?.hotjar?.snippetVersion || 6,
+      snippetVersion: config?.hotjar?.snippetVersion ?? 6,
     },
     themeConfig: {
       defaultTheme: config?.themeConfig?.defaultTheme || themes[0],

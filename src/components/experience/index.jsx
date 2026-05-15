@@ -1,95 +1,137 @@
 import { skeleton } from '../../helpers/utils';
-import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-const ListItem = ({ time, position, company, companyLink }) => (
-  <li className="mb-5 ml-4">
-    <div
-      className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
-      style={{ left: '-4.5px' }}
-    ></div>
-    <div className="my-0.5 text-xs">{time}</div>
-    <h3 className="font-semibold">{position}</h3>
-    <div className="mb-4 font-normal">
-      <a href={companyLink} target="_blank" rel="noreferrer">
-        {company}
-      </a>
+const ExperienceCard = ({
+  time,
+  position,
+  company,
+  companyLink,
+  description,
+  technologies,
+}) => (
+  <div className="card compact bg-base-100 shadow hover:shadow-lg transition-shadow border border-base-300 border-opacity-40 w-full">
+    <div className="card-body p-6 md:p-8">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+        <div>
+          <h3 className="font-semibold text-lg text-base-content text-opacity-80">
+            {position}
+          </h3>
+
+          <div className="text-sm text-base-content text-opacity-60">
+            {companyLink ? (
+              <a
+                href={companyLink}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                {company}
+              </a>
+            ) : (
+              company
+            )}
+          </div>
+        </div>
+
+        <div className="text-xs text-base-content text-opacity-50 whitespace-nowrap">
+          {time}
+        </div>
+      </div>
+
+      {Array.isArray(description) && description.length > 0 && (
+        <ul className="mt-4 space-y-2 text-sm leading-relaxed text-base-content text-opacity-70 list-disc list-outside ml-5">
+          {description.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      )}
+
+      {Array.isArray(technologies) && technologies.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-5">
+          {technologies.map((technology, index) => (
+            <span
+              key={index}
+              className="badge badge-outline badge-sm text-xs opacity-70"
+            >
+              {technology}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
-  </li>
+  </div>
 );
 
 const Experience = ({ experiences, loading }) => {
   const renderSkeleton = () => {
-    let array = [];
-    for (let index = 0; index < 2; index++) {
-      array.push(
-        <ListItem
-          key={index}
-          time={skeleton({
-            width: 'w-5/12',
-            height: 'h-4',
-          })}
-          position={skeleton({
-            width: 'w-6/12',
-            height: 'h-4',
-            className: 'my-1.5',
-          })}
-          company={skeleton({ width: 'w-6/12', height: 'h-3' })}
-        />
-      );
-    }
-
-    return array;
+    return Array.from({ length: 2 }).map((_, index) => (
+      <div
+        className="card compact bg-base-100 shadow border border-base-300 border-opacity-40"
+        key={index}
+      >
+        <div className="card-body p-6 md:p-8">
+          {skeleton({ width: 'w-5/12', height: 'h-6', className: 'mb-2' })}
+          {skeleton({ width: 'w-4/12', height: 'h-4', className: 'mb-4' })}
+          {skeleton({ width: 'w-full', height: 'h-4', className: 'mb-2' })}
+          {skeleton({ width: 'w-11/12', height: 'h-4', className: 'mb-2' })}
+          {skeleton({ width: 'w-10/12', height: 'h-4' })}
+        </div>
+      </div>
+    ));
   };
+
+  if (!experiences || experiences.length === 0) {
+    return null;
+  }
+
   return (
-    <>
-      {experiences?.length !== 0 && (
-        <div className="card shadow-lg compact bg-base-100">
-          <div className="card-body">
-            <div className="mx-3">
-              <h5 className="card-title">
-                {loading ? (
-                  skeleton({ width: 'w-32', height: 'h-8' })
-                ) : (
-                  <span className="text-base-content opacity-70">
-                    Experience
-                  </span>
-                )}
-              </h5>
-            </div>
-            <div className="text-base-content text-opacity-60">
-              <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
-                {loading ? (
-                  renderSkeleton()
-                ) : (
-                  <Fragment>
-                    {experiences.map((experience, index) => (
-                      <ListItem
+    <div className="col-span-1 lg:col-span-2 w-full">
+      <div className="grid grid-cols-2 gap-6">
+        <div className="col-span-2">
+          <div className="card compact bg-base-100 shadow bg-opacity-40 w-full">
+            <div className="card-body p-6 md:p-8">
+              <div className="mx-3 flex items-center justify-between mb-2">
+                <h5 className="card-title">
+                  {loading ? (
+                    skeleton({ width: 'w-48', height: 'h-8' })
+                  ) : (
+                    <span className="text-base-content opacity-70">
+                      Professional Experience
+                    </span>
+                  )}
+                </h5>
+              </div>
+
+              <div className="grid grid-cols-1 gap-6">
+                {loading
+                  ? renderSkeleton()
+                  : experiences.map((experience, index) => (
+                      <ExperienceCard
                         key={index}
                         time={`${experience.from} - ${experience.to}`}
                         position={experience.position}
                         company={experience.company}
-                        companyLink={
-                          experience.companyLink ? experience.companyLink : null
-                        }
+                        companyLink={experience.companyLink || null}
+                        description={experience.description || []}
+                        technologies={experience.technologies || []}
                       />
                     ))}
-                  </Fragment>
-                )}
-              </ol>
+              </div>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-ListItem.propTypes = {
+ExperienceCard.propTypes = {
   time: PropTypes.node,
   position: PropTypes.node,
   company: PropTypes.node,
   companyLink: PropTypes.string,
+  description: PropTypes.array,
+  technologies: PropTypes.array,
 };
 
 Experience.propTypes = {
